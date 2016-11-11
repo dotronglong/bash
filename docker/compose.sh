@@ -40,7 +40,7 @@ startSystem() {
     setUpMachine
     docker-compose up -d
 
-    systemStart="system.start"
+    systemStart="system.start.sh"
     if [ -f $systemStart ]; then
         source $systemStart
     fi
@@ -52,7 +52,7 @@ stopSystem() {
     setUpMachine
     docker-compose down
 
-    systemStop="system.stop"
+    systemStop="system.stop.sh"
     if [ -f $systemStop ]; then
         source $systemStop
     fi
