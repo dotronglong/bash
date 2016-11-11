@@ -1,10 +1,6 @@
 #!/usr/bin/env bash
 
 machineName=$2
-if [ -z $machineName ]; then
-    echo "MACHINE_NAME must be specified!"
-    exit
-fi
 main() {
     case $1 in
         start)
@@ -27,6 +23,10 @@ main() {
 }
 
 setUpMachine() {
+    if [ -z $machineName ]; then
+        # use host (current) machine
+        return
+    fi
     machineStatus=$(docker-machine ls | grep $machineName | awk '{print $4}')
     if [ -z $machineStatus ]; then
         docker-machine create --driver virtualbox --virtualbox-cpu-count "2" --virtualbox-memory "2048" $machineName
